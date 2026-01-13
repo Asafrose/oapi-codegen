@@ -286,9 +286,17 @@ func (sh *strictMCPHandler) ListPets(ctx context.Context, request *mcp.CallToolR
 			return nil, err
 		}
 
-		// Return response as StructuredContent to comply with MCP output schema requirements
+		// Return response with both Content (for display/backwards compatibility) and
+		// StructuredContent (for schema validation) per MCP specification
 		result := &mcp.CallToolResult{}
 		if response != nil {
+			responseBytes, err := json.Marshal(response)
+			if err != nil {
+				return sh.options.ResponseErrorHandlerFunc(ctx, fmt.Errorf("error marshaling response: %w", err)), nil
+			}
+			result.Content = []mcp.Content{
+				&mcp.TextContent{Text: string(responseBytes)},
+			}
 			result.StructuredContent = response
 		}
 		return result, nil
@@ -336,9 +344,17 @@ func (sh *strictMCPHandler) CreatePet(ctx context.Context, request *mcp.CallTool
 			return nil, err
 		}
 
-		// Return response as StructuredContent to comply with MCP output schema requirements
+		// Return response with both Content (for display/backwards compatibility) and
+		// StructuredContent (for schema validation) per MCP specification
 		result := &mcp.CallToolResult{}
 		if response != nil {
+			responseBytes, err := json.Marshal(response)
+			if err != nil {
+				return sh.options.ResponseErrorHandlerFunc(ctx, fmt.Errorf("error marshaling response: %w", err)), nil
+			}
+			result.Content = []mcp.Content{
+				&mcp.TextContent{Text: string(responseBytes)},
+			}
 			result.StructuredContent = response
 		}
 		return result, nil
@@ -386,9 +402,17 @@ func (sh *strictMCPHandler) DeletePet(ctx context.Context, request *mcp.CallTool
 			return nil, err
 		}
 
-		// Return response as StructuredContent to comply with MCP output schema requirements
+		// Return response with both Content (for display/backwards compatibility) and
+		// StructuredContent (for schema validation) per MCP specification
 		result := &mcp.CallToolResult{}
 		if response != nil {
+			responseBytes, err := json.Marshal(response)
+			if err != nil {
+				return sh.options.ResponseErrorHandlerFunc(ctx, fmt.Errorf("error marshaling response: %w", err)), nil
+			}
+			result.Content = []mcp.Content{
+				&mcp.TextContent{Text: string(responseBytes)},
+			}
 			result.StructuredContent = response
 		}
 		return result, nil
@@ -436,9 +460,17 @@ func (sh *strictMCPHandler) GetPet(ctx context.Context, request *mcp.CallToolReq
 			return nil, err
 		}
 
-		// Return response as StructuredContent to comply with MCP output schema requirements
+		// Return response with both Content (for display/backwards compatibility) and
+		// StructuredContent (for schema validation) per MCP specification
 		result := &mcp.CallToolResult{}
 		if response != nil {
+			responseBytes, err := json.Marshal(response)
+			if err != nil {
+				return sh.options.ResponseErrorHandlerFunc(ctx, fmt.Errorf("error marshaling response: %w", err)), nil
+			}
+			result.Content = []mcp.Content{
+				&mcp.TextContent{Text: string(responseBytes)},
+			}
 			result.StructuredContent = response
 		}
 		return result, nil
@@ -492,9 +524,17 @@ func (sh *strictMCPHandler) UpdatePet(ctx context.Context, request *mcp.CallTool
 			return nil, err
 		}
 
-		// Return response as StructuredContent to comply with MCP output schema requirements
+		// Return response with both Content (for display/backwards compatibility) and
+		// StructuredContent (for schema validation) per MCP specification
 		result := &mcp.CallToolResult{}
 		if response != nil {
+			responseBytes, err := json.Marshal(response)
+			if err != nil {
+				return sh.options.ResponseErrorHandlerFunc(ctx, fmt.Errorf("error marshaling response: %w", err)), nil
+			}
+			result.Content = []mcp.Content{
+				&mcp.TextContent{Text: string(responseBytes)},
+			}
 			result.StructuredContent = response
 		}
 		return result, nil
